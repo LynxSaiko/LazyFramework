@@ -163,7 +163,7 @@ class LazyFramework:
             ("show modules", "Show available modules"),
             ("use <module>", "Load a module by name"),
             ("options", "Show options for current module"),
-            ("set <option> <value>", "Set module option"),
+            ("set <option>", "Set module option"),
             ("run", "Run current module"),
             ("back", "Unload module"),
             ("search <keyword>", "Search modules"),
@@ -181,7 +181,7 @@ class LazyFramework:
 
         # Tentukan lebar kolom (responsif)
         # cmd_col proporsional, minimal 12-18; desc_col sisa, minimal 30
-        cmd_col = max(12, int(term_width * 0.28))
+        cmd_col = max(12, int(term_width * 0.24))
         desc_col = max(30, term_width - cmd_col - 6)
         # Pastikan desc_col tidak melebihi terminal
         if cmd_col + desc_col + 6 > term_width:
@@ -191,7 +191,7 @@ class LazyFramework:
         pad = max(0, (term_width - table_width) // 2)
 
         # Title di kiri
-        print("\nCore Commands")
+        print("\nUsage Commands")
         print("----------------")
         print()
 
@@ -231,7 +231,7 @@ class LazyFramework:
             term_width = 80
 
         # persiapkan kolom: name / current / required / desc
-        name_col = max(18, int(term_width * 0.22))
+        name_col = max(14, int(term_width * 0.12))
         current_col = 12
         req_col = 10
         # sisa untuk description (minimal 30)
@@ -398,7 +398,7 @@ class LazyFramework:
             term_width = 80
 
         # column sizing (responsif)
-        cmd_col = max(18, int(term_width * 0.35))         # lebar untuk nama modul
+        cmd_col = max(18, int(term_width * 0.15))         # lebar untuk nama modul
         desc_col = max(30, term_width - cmd_col - 6)      # sisa untuk deskripsi
         if cmd_col + desc_col + 6 > term_width:
             desc_col = max(10, term_width - cmd_col - 6)
@@ -413,7 +413,7 @@ class LazyFramework:
         print(" " * pad + f"{'Module':<{cmd_col}}  {'Description'}")
         print(" " * pad + f"{'-' * cmd_col}  {'-' * desc_col}")
 
-        wrapper = textwrap.TextWrapper(width=desc_col)
+        wrapper = textwrap.TextWrapper(width=desc_col, break_long_words=False, break_on_hyphens=False)
 
         # print results (sorted)
         for key, desc in sorted(results):
