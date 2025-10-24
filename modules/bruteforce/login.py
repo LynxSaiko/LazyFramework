@@ -582,7 +582,6 @@ class UltraFastPhpMyAdminBruteforce:
             
         console.print("\n" + "="*60)
         
-        summary_content = f"""
-🎯 [bold cyan]Target:[/bold cyan] {self.options.get('TARGET')}
+        summary_content = f"""🎯 [bold cyan]Target:[/bold cyan] {self.options.get('TARGET')}
 ⏰ [bold yellow]Total Attempts:[/bold yellow] {self.results['attempts']:,}
-✅ [bold green]Successful 
+✅ [bold green]Successful L
