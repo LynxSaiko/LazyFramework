@@ -189,7 +189,7 @@ install-binary:
 	@printf "    ${BRIGHT_YELLOW}[${BRIGHT_BLUE}→${BRIGHT_YELLOW}]${RESET} ${BRIGHT_CYAN}Copying framework files...${RESET}"
 	@if [ $(NEED_SUDO) -eq 1 ]; then \
 		sudo cp -r *.py "$(INSTALL_DIR)/" 2>/dev/null || true; \
-		for dir in bin modules app core lib themes; do \
+		for dir in bin modules app core lib themes ; do \
 			if [ -d "$$dir" ]; then \
 				sudo cp -r "$$dir" "$(INSTALL_DIR)/" 2>/dev/null || true; \
 			fi; \
@@ -401,6 +401,14 @@ uninstall:
 		printf "${BRIGHT_YELLOW}[${BRIGHT_CYAN}*${BRIGHT_YELLOW}]${RESET} ${BRIGHT_CYAN}Uninstallation cancelled.${RESET}\n"; \
 	fi
 	@echo ""
+
+
+# Fix missing theme setelah install
+# Fix theme tidak ikut saat install
+install: banner
+	@echo "[+] Copying theme files..."
+	$(if $$ (filter 1, $$(NEED_SUDO)),sudo )mkdir -p "$(INSTALL_DIR)/lib/ui/themes"
+	$(if $$ (filter 1, $$(NEED_SUDO)),sudo )cp -f themes/*.qss "$(INSTALL_DIR)/lib/ui/themes/" 2>/dev/null || true
 
 # ===========================================================================
 # UTILITIES
